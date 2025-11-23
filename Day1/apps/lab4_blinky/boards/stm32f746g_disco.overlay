@@ -1,0 +1,42 @@
+/ {
+	gpio_keys {
+		compatible = "gpio-keys";
+		external_button: button_external {
+			label = "Key";
+			gpios = <&gpioi 2 GPIO_ACTIVE_HIGH>;
+			zephyr,code = <INPUT_KEY_0>;
+		};
+	};
+
+	leds {
+		compatible = "gpio-leds";
+		orange_led: led_orange {
+			gpios = < &gpioi 3 GPIO_ACTIVE_HIGH >;
+			label = "Orange";
+		};
+		blue_led: led_blue {
+			gpios = < &gpioh 6 GPIO_ACTIVE_HIGH >;
+			label = "Blue";
+		};
+		green_led: led_green {
+			gpios = <&gpioi 0 GPIO_ACTIVE_HIGH>;
+			label = "Green";
+		};
+		red_led: led_red {
+			gpios = < &gpiog 7 GPIO_ACTIVE_HIGH >;
+			label = "Red";
+		};
+	};
+
+    aliases {
+        my-led0 = &orange_led;
+        my-led1 = &blue_led;
+        my-led2 = &green_led;
+        my-led3 = &red_led;
+        my-btn  = &external_button;
+    };
+	
+	zephyr,user {
+		my-led-count = <4>;
+     };
+};
