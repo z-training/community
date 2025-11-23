@@ -26,9 +26,9 @@ to your west manifest (west.yml):
 
 Then update your workspace:
 
-    `$ west update`
+    $ west update
 
 This will clone the repo into:
 
-    `<workspace_root>/ZTrainingLabs/`
+    <workspace_root>/ZTrainingLabs/
 
