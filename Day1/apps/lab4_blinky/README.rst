@@ -1,33 +1,36 @@
-.. zephyr:code-sample:: hello_world
-   :name: Hello World
+# External LED Blink Example — Zephyr
 
-   Print "Hello World" to the console.
+This example demonstrates how to blink **four external LEDs** connected to a
+Zephyr-supported board. The LED GPIOs are defined in the Devicetree using the
+aliases:
 
-Overview
-********
+- my_led0
+- my_led1
+- my_led2
+- my_led3
 
-A simple sample that can be used with any :ref:`supported board <boards>` and
-prints "Hello World" to the console.
+The application retrieves these aliases, configures each pin as an output, and
+blinks the LEDs sequentially.
 
-Building and Running
-********************
+---
 
-This application can be built and executed on QEMU as follows:
+## Requirements
 
-.. zephyr-app-commands::
-   :zephyr-app: samples/hello_world
-   :host-os: unix
-   :board: qemu_x86
-   :goals: run
-   :compact:
+- Zephyr RTOS installed
+- Board with 4 external LEDs connected and defined in Devicetree
+- Overlay providing my_led0 → my_led3 aliases
 
-To build for another board, change "qemu_x86" above to that board's name.
+---
 
-Sample Output
-=============
+## Expected Behavior
 
-.. code-block:: console
+- LEDs are configured as outputs at startup
+- LEDs toggle **one after another**
+- Each LED changes state every **500 ms**
+- Sequence repeats forever
 
-    Hello World! x86
+Visual LED blinking confirms success.
 
-Exit QEMU by pressing :kbd:`CTRL+A` :kbd:`x`.
+---
+
+Happy blinking! ✨
