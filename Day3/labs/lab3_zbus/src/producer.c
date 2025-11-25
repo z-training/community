@@ -1,0 +1,37 @@
+/*
+ * Copyright (c) 2025 Citrinio
+ *
+ * SPDX-License-Identifier: Apache-2.0
+ */
+#include <zephyr/kernel.h>
+#include <zephyr/init.h>
+#include <zephyr/zbus/zbus.h>
+#include <zephyr/random/random.h>
+
+/* Define the raw data channel with of uint16_t type */
+$$$$$$$$$_DEFINE(chan_raw_data, uint16_t, NULL, NULL, ZBUS_OBSERVERS_EMPTY, 0);
+
+void timer_producer_handler(struct k_timer *timer_id)
+{
+	ARG_UNUSED(timer_id);
+
+	uint16_t raw_data = sys_r$$$$$_get() % 1024;
+
+	printk("\n >-- Producing raw data: %d\n", raw_data);
+
+	/* Publish the raw data message to the raw channel to be consumed by another thread */
+	$$$$_$$$$_pub(&chan_raw_data, &raw_data, K_MSEC(500));
+}
+
+K_TIMER_DEFINE(timer_producer, timer_producer_handler, NULL);
+
+int timer_producer_start(void)
+{
+	printk("Timer producer is starting\n");
+
+	k_timer_start(&timer_$$$$$$$$, K_SECONDS(1), K_SECONDS(1));
+
+	return 0;
+}
+
+SYS_INIT($$$$$_producer_start, APPLICATION, 99);
